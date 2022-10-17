@@ -1,0 +1,20 @@
+name: learn-github-actions
+
+language: c
+compiler:
+  - gcc
+
+jobs:
+  runs-on: ubuntu-latest
+  include:
+    - stage: test
+      script: 
+        - cd ./src
+        - gcc --coverage -o giftcardreader giftcardreader.c
+        - ./giftcardreader 1 /Part2/crash1.gft
+        - ./giftcardreader 1 /Part2/crash2.gft
+        - ./giftcardreader 1 /Part2/hang.gft
+        - ./giftcardreader 2 /Part3/cov1.gft
+        - ./giftcardreader 1 /Part3/cov2.gft
+        - ./giftcardreader 1 /Part3/fuzzer1.gft
+        - ./giftcardreader 1 /Part3/fuzzer2.gft
